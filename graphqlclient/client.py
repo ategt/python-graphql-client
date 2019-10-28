@@ -2,13 +2,14 @@ from six.moves import urllib
 import json
 
 class GraphQLClient:
-    def __init__(self, endpoint):
+    def __init__(self, endpoint, parseResponse = True):
         self.endpoint = endpoint
         self.token = None
         self.headername = None
+        self.parseResponse = parseResponse
 
     def execute(self, query, variables=None):
-        return self._send(query, variables)
+        return json.loads(self._send(query, variables)) if self.parseResponse else self._send(query, variables)
 
     def inject_token(self, token, headername='Authorization'):
         self.token = token
