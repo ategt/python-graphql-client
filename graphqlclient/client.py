@@ -1,6 +1,8 @@
 from six.moves import urllib
 import json
 
+from graphqlclient.graphql_exception import GraphQLException
+
 class GraphQLClient:
     def __init__(self, endpoint):
         self.endpoint = endpoint
@@ -29,6 +31,4 @@ class GraphQLClient:
             response = urllib.request.urlopen(req)
             return response.read().decode('utf-8')
         except urllib.error.HTTPError as e:
-            print((e.read()))
-            print('')
-            raise e
+            raise GraphQLException(e)
