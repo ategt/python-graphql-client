@@ -1,7 +1,6 @@
 import json
 
 class GraphQLException(Exception):
-	"""GraphQLException"""
 	def __init__(self, sourceException):
 		super(GraphQLException, self).__init__("Errors occured, see response property for details.")
 		self.sourceException = sourceException
